@@ -7,8 +7,14 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <!--fullcalendar 언어 설정관련 script-->
+    <script src='fullcalendar/dist/index.global.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
     <script defer th:src="@{/resources/scripts/calender.js}"></script>
+    <style>
+        .fc-day-number.fc-sat.fc-past { color:#0000FF; }     /* 토요일 */   
+         .fc-day-number.fc-sun.fc-past { color:#FF0000; }    /* 일요일 */
+
+    </style>
 </head>
 <body>
 <div id='calendar'></div>

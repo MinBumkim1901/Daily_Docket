@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CalenderController {
     @RequestMapping(value = "/calender",method = RequestMethod.GET)
     public ModelAndView getMain(){
-        ModelAndView modelAndView = new ModelAndView("calender");
+        ModelAndView modelAndView = new ModelAndView("calender/calender");
         return modelAndView;
     }
 }

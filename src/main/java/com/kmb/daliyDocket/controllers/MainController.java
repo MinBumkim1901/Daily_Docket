@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public ModelAndView getMain(){
-        ModelAndView modelAndView = new ModelAndView("main");
+        ModelAndView modelAndView = new ModelAndView("home/main");
         return modelAndView;
     }
 }
