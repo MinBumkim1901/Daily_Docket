@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kmb.daliyDocket.mappers.UserMapper">
+
+    <!-- 사용자의 이메일을 검색하는 쿼리입니다.
+      주어진 이메일 값을 엔터티에 바인딩 시켜 일치하는 사용자를 찾아 반환합니다.
+       BINARY는 한자 한자 비교하기 위함-->
+    <select id="selectUserByEmail"
+            resultType="com.kmb.daliyDocket.Entity.UserEntity">
+        SELECT `email` = #{email}
+        FROM daily_docket.`users`
+        WHERE BINARY `email` = #{email}
+        LIMIT 1
+    </select>
+
+    <!-- 사용자의 닉네임을 검색하는 쿼리입니다.
+      주어진 닉네임 값을 엔터티에 바인딩 시켜 일치하는 사용자를 찾아 반환합니다. -->
+    <select id="selectUserByNickName"
+            resultType="com.kmb.daliyDocket.Entity.UserEntity">
+        SELECT `nickname` = #{nickname}
+        FROM daily_docket.`users`
+        WHERE BINARY `nickname` = #{nickname}
+        LIMIT 1
+    </select>
+
+    <insert id="insertUser"
+            parameterType="com.kmb.daliyDocket.Entity.UserEntity">
+        INSERT INTO `daily_docket`.`users`(`email`, `password`, `name`, `nickname`, `birth`,`registered_at`,`admin_flag`)
+        VALUES (#{email},
+                #{password},
+                #{name},
+                #{nickname},
+                #{birth},
+                IFNULL(#{registeredAt}, DEFAULT(`registered_at`)),
+                #{adminFlag}
+    </insert>
+
+</mapper>
