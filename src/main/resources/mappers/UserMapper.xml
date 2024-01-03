@@ -27,12 +27,11 @@
 
     <insert id="insertUser"
             parameterType="com.kmb.daliyDocket.Entity.UserEntity">
-        INSERT INTO `daily_docket`.`users`(`email`, `password`, `name`, `nickname`, `birth`,`registered_at`,`admin_flag`)
+        INSERT INTO `daily_docket`.`users`(`email`, `password`, `name`, `nickname`,`registered_at`,`admin_flag`)
         VALUES (#{email},
                 #{password},
                 #{name},
                 #{nickname},
-                #{birth},
                 IFNULL(#{registeredAt}, DEFAULT(`registered_at`)),
                 #{adminFlag}
     </insert>

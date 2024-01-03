@@ -23,6 +23,8 @@ public class UserService {
             return RegisterResult.DUPLICATE_NICKNAME;
         } //null이 아닐 경우 가입한 닉네임이 있기 때문에 실패!
 
+        user.setAdmin(false);
+
         return userMapper.insertUser(user) > 0
                 ? RegisterResult.SUCCESS
                 : RegisterResult.FAILURE;

@@ -48,6 +48,7 @@ registerForm.onsubmit = e => {
             switch (responseObject.result) {
                 case 'duplicate_email':
                     alert('중복된 이메일입니다!');
+                    alert('중복된 이메일입니다!');
                     break;
                 case 'duplicate_nickname':
                     alert('중복된 닉네임 입니다!');
