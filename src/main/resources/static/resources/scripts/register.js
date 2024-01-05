@@ -31,7 +31,6 @@ registerForm.onsubmit = e => {
     }
     if(registerForm['birthday'].value === ''){
         alert('생일을 입력해주세요');
-        alert('생일을 입력해주세요');
         return;
     }
     const xhr = new XMLHttpRequest();
