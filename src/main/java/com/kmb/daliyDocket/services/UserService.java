@@ -1,6 +1,6 @@
 package com.kmb.daliyDocket.services;
 
-import com.kmb.daliyDocket.Entity.UserEntity;
+import com.kmb.daliyDocket.entities.UserEntity;
 import com.kmb.daliyDocket.enums.RegisterResult;
 import com.kmb.daliyDocket.mappers.UserMapper;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public RegisterResult registerResult(UserEntity user) {
+    public RegisterResult registerResult(UserEntity user){
         System.out.println(user.getEmail());
         if (userMapper.selectUserByEmail(user.getEmail()) != null) {
             return RegisterResult.DUPLICATE_EMAIL;

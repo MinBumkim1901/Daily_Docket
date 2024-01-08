@@ -29,8 +29,7 @@ registerForm.onsubmit = e => {
         alert('닉네임을 입력해주세요');
         return;
     }
-    if(registerForm['birthday'].value === ''){
-        alert('생일을 입력해주세요');
+    if(registerForm['birth'].value === ''){
         alert('생일을 입력해주세요');
         return;
     }
@@ -40,7 +39,7 @@ registerForm.onsubmit = e => {
     formData.append('password',registerForm['password'].value);
     formData.append('name',registerForm['name'].value);
     formData.append('nickname',registerForm['nickname'].value);
-    formData.append('birthday',registerForm['birthday'].value);
+    formData.append('birthStr',registerForm['birth'].value);
     xhr.open('POST','/register');
     xhr.onreadystatechange = () => {
      if(xhr.readyState === XMLHttpRequest.DONE){
@@ -48,7 +47,6 @@ registerForm.onsubmit = e => {
             const responseObject = JSON.parse(xhr.responseText);
             switch (responseObject.result) {
                 case 'duplicate_email':
-                    alert('중복된 이메일입니다!');
                     alert('중복된 이메일입니다!');
                     break;
                 case 'duplicate_nickname':

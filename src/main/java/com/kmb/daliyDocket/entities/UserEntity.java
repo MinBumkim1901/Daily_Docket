@@ -1,4 +1,4 @@
-package com.kmb.daliyDocket.Entity;
+package com.kmb.daliyDocket.entities;
 
 import java.util.Date;
 import java.util.Objects;
@@ -8,28 +8,9 @@ public class UserEntity {
     private String password;
     private String name;
     private String nickname;
-    private Date birthday;
+    private Date birth;
     private Date registeredAt;
     private boolean isAdmin;
-    public Date getRegisteredAt() {
-        return registeredAt;
-    }
-
-    public UserEntity setRegisteredAt(Date registeredAt) {
-        this.registeredAt = registeredAt;
-        return this;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public UserEntity setAdmin(boolean admin) {
-        isAdmin = admin;
-        return this;
-    }
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -80,12 +61,30 @@ public class UserEntity {
         return this;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public Date getBirth() {
+        return birth;
     }
 
-    public UserEntity setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public UserEntity setBirth(Date birth) {
+        this.birth = birth;
+        return this;
+    }
+
+    public Date getRegisteredAt() {
+        return registeredAt;
+    }
+
+    public UserEntity setRegisteredAt(Date registeredAt) {
+        this.registeredAt = registeredAt;
+        return this;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public UserEntity setAdmin(boolean admin) {
+        isAdmin = admin;
         return this;
     }
 }

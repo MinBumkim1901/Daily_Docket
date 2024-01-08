@@ -23,5 +23,6 @@
 
 # ✨ 복기
 1. 생일값을 어떻게 변환해서 넣어주나?
+- simpleFormat을 이용해 String값 Date타입으로 변환!
 
 

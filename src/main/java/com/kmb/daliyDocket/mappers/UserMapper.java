@@ -1,6 +1,6 @@
 package com.kmb.daliyDocket.mappers;
 
-import com.kmb.daliyDocket.Entity.UserEntity;
+import com.kmb.daliyDocket.entities.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
