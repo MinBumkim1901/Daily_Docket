@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/")
-public class AccountController {
+public class RegisterController {
     private final UserService userService;
 
-    public AccountController(UserService userService) {
+    public RegisterController(UserService userService) {
         this.userService = userService;
     }
 
@@ -28,6 +29,17 @@ public class AccountController {
     public ModelAndView getLogin() {
         ModelAndView modelAndView = new ModelAndView("login/login");
         return modelAndView;
+    }
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @ResponseBody
+    public String postLogin(HttpSession session,UserEntity user){
+        boolean result = this.userService.login(user);
+
+        if(result){
+            session.setAttribute("user",user);
+        } //로그인 성공시 user의 세션정보 유지
+
+        return String.valueOf(result);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

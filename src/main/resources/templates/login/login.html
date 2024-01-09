@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>회원가입</title>
     <script defer th:src="@{/resources/scripts/register.js}"></script>
+    <script defer th:src="@{/resources/scripts/login.js}"></script>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/register.css}">
 </head>
 <body>
@@ -23,11 +24,11 @@
         </form>
     </div>
     <div class="form-container sign-in-container">
-        <form action="#">
+        <form id="loginForm">
             <h1>로그인</h1>
             <span>계정을 사용해 로그인하세요!</span>
-            <input type="email" placeholder="이메일">
-            <input type="password" placeholder="비밀번호">
+            <input name="email" type="email" placeholder="이메일">
+            <input name="password" type="password" placeholder="비밀번호">
             <a href="#">비밀번호를 잊으셨나요?</a>
             <button>로그인</button>
         </form>
