@@ -10,6 +10,7 @@ loginForm.onsubmit = e => {
 
     if(loginForm['password'].value === ''){
         alert('비밀번호를 입력해주세요');
+        alert('비밀번호를 입력해주세요');
         return; //조건문 종료
     }
 
