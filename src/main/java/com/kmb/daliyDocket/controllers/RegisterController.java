@@ -42,6 +42,13 @@ public class RegisterController {
         return String.valueOf(result);
     }
 
+    @RequestMapping(value="logout", method = RequestMethod.GET)
+    public ModelAndView getLogout(HttpSession session){
+        ModelAndView modelAndView = new ModelAndView("redirect:/");
+        session.setAttribute("user",null);
+        return modelAndView;
+    } //로그아웃 클릭시 세션값을 null로 설정해 로그인 풀리게 하는 GET메서드
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody //HTTP 본문요청 되게해준다
     public String getRegister(UserEntity user,

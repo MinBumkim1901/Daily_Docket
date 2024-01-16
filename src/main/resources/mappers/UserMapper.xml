@@ -5,7 +5,9 @@
 <mapper namespace="com.kmb.daliyDocket.mappers.UserMapper">
     <select id="selectUserByEmail"
             resultType="com.kmb.daliyDocket.entities.UserEntity">
-        SELECT `email` = #{email}
+        SELECT `email`    AS `email`,
+               `password` AS `password`,
+               `nickname` AS `nickname`
         FROM daily_docket.`users`
         WHERE BINARY `email` = #{email}
         LIMIT 1
@@ -13,7 +15,7 @@
 
     <select id="selectUserByNickName"
             resultType="com.kmb.daliyDocket.entities.UserEntity">
-        SELECT `nickname` = #{nickname}
+        SELECT `nickname` AS `nickname`
         FROM daily_docket.`users`
         WHERE BINARY `nickname` = #{nickname}
         LIMIT 1
@@ -30,5 +32,7 @@
                 IFNULL(#{registeredAt}, DEFAULT(`registered_at`)),
                 #{isAdmin})
     </insert>
+
+
 
 </mapper>

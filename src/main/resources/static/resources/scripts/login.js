@@ -31,5 +31,5 @@ loginForm.onsubmit = e => {
 
         }
     }
-    xhr.send();
+    xhr.send(formData);
 }

@@ -6,6 +6,8 @@ import com.kmb.daliyDocket.mappers.UserMapper;
 import com.kmb.daliyDocket.utils.CryptoUtil;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class UserService {
     private final UserMapper userMapper;
@@ -49,5 +51,10 @@ public class UserService {
 
         user.setNickname(existingUser.getNickname());
         return true;
+    }
+
+    public UserEntity getUser(HttpSession session) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        return this.userMapper.selectUserByEmail(user.getEmail());
     }
 }
