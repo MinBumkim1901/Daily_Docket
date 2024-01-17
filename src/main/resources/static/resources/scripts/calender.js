@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
         events:[ // 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어주면된다.
             {
                 title:'일정DD',
+                title:'일정DD',
                 start:'2021-05-26 00:00:00',
                 end:'2021-05-27 24:00:00'
                 // color 값을 추가해 색상도 변경 가능 자세한 내용은 하단의 사이트 참조
