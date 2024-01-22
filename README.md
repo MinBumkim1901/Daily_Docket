@@ -6,7 +6,7 @@
 
 ## ‍💻 사용기술
 - 개발 환경: `windows 10`
-- 개발 도구: `IntelliJ, Github, Ubuntu`
+- 개발 도구: `IntelliJ, Github`
 - 데이터 베이스: `MariaDB/myBatisXml`
 - 프론트 개발 언어: `HTML / CSS / JS`
 - 백엔드 개발 언어: `Java / MariaDB / MyBatis`
@@ -19,10 +19,14 @@
 ## ✨ 참여
 - 인원: 1명
 - 기간: 23.12.27 ~
-- 완성 목표 기간: 1달
+- 완성 목표 기간: 1달 에서 1달 반
 
 # ✨ 복기
 1. 생일값을 어떻게 변환해서 넣어주나?
 - simpleFormat을 이용해 String값 Date타입으로 변환!
+
+2. FullCalendar를 사용자의 아이디와 같이 일정등록을 해서 DB에 어떻게 등록하면 될까?
+
+3. 일정등록이 되었다면 조회를 어떻게 해야할까?
 
 
