@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         if (content == null || content === "") {
                             alert("내용을 입력하세요.");
+                            alert("내용을 입력하세요.");
                         } else if (start_date === "" || end_date === "") {
                             alert("날짜를 입력하세요.");
                         } else if (new Date(end_date) - new Date(start_date) < 0) {
