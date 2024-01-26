@@ -32,7 +32,4 @@
                 IFNULL(#{registeredAt}, DEFAULT(`registered_at`)),
                 #{isAdmin})
     </insert>
-
-
-
 </mapper>
