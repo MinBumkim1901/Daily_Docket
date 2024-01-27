@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='ko'>
 <head>
     <meta charset='utf-8' />
     <!--fullcalendar css-->
@@ -13,29 +13,29 @@
     <script defer th:src="@{/resources/scripts/calender.js}"></script>
 </head>
 <body>
-
 <form id="addSchedule">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">일정을 입력하세요.</h5>
     </div>
     <div class="form-group">
         <span>일정 내용</span>
-        <input type="text" class="form-control" id="calendar_content" name="calendar_content">
+        <input type="text" class="form-control" id="calendar_content" name="content">
     </div>
     <div>
         <span class="col-form-label">시작 날짜</span>
-        <input type="date" class="form-control" id="calendar_start_date" name="calendar_start_date">
+        <input type="date" class="form-control" id="calendar_start_date" name="start_date">
     </div>
     <div>
         <span class="col-form-label">종료 날짜</span>
-        <input type="date" class="form-control" id="calendar_end_date" name="calendar_end_date">
+        <input type="date" class="form-control" id="calendar_end_date" name="end_date">
     </div>
     <div class="modal-footer">
-        <button type="button">추가</button>
+        <input type="submit" value="추가">
         <button type="button">취소</button>
     </div>
 </form>
 
 <div id='calendar'></div>
+
 </body>
 </html>

@@ -2,33 +2,56 @@
 
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
 
-html {
-    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif
-    padding: 0;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
-    width: 100vw;
-    height: 100vh;
-    color: #212121;
-    font-size: 1rem;
-    font-weight: 400;
-    background-color: white;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-body {
-    padding: 0;
-    margin: 0;
-    width: 100vw;
-    height: 100vh;
-    color: #212121;
-    font-size: 1rem;
-    font-weight: 400;
-    background-color: white;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.title {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.login,
+.calendar {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.login a,
+.calendar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.login a:hover,
+.calendar a:hover {
+    text-decoration: underline;
+}
+
+main {
+    /*margin: 0;*/
+    /*width: 100vw;*/
+    /*height: 90vh;*/
+    /*color: #212121;*/
+    /*font-size: 1rem;*/
+    /*font-weight: 400;*/
+    /*background-color: white;*/
+    /*align-items: center;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
+
 }

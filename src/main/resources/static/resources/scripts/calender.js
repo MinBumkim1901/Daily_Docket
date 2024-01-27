@@ -71,34 +71,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 text: "일정 추가",  // 버튼 내용
                 click: function () { // 버튼 클릭 시 이벤트 추가
                     // Show the modal
-                   addSchedule.show();
+                    addSchedule.show();
+                    var content = addSchedule['content'].value;
+                    var start_date = addSchedule['start_date'].value;
+                    var end_date = addSchedule['end_date'].value;
 
                     // Set the onsubmit handler
                     addSchedule.onsubmit = e => {
-                        var content = addSchedule.querySelector('.calendar_content').value;
-                        var start_date = addSchedule.querySelector('.calendar_start_date').value;
-                        var end_date = addSchedule.querySelector('.calendar_end_date').value;
-
+                        e.preventDefault();
                         if (content == null || content === "") {
                             alert("내용을 입력하세요.");
-                            alert("내용을 입력하세요.");
+                            return;
                         } else if (start_date === "" || end_date === "") {
                             alert("날짜를 입력하세요.");
+                            return;
                         } else if (new Date(end_date) - new Date(start_date) < 0) {
                             alert("종료일이 시작일보다 먼저입니다.");
-                        } else { // 정상적인 입력 시
-                            var obj = {
-                                "title": content,
-                                "start": start_date,
-                                "end": end_date
-                            }; // 전송할 객체 생성
-
-                            // console.log(obj); // 서버로 해당 객체를 전달해서 DB 연동 가능
-                            //
-                            // // Hide the modal after processing the form data
-                            // $('#addSchedule').modal('hide');
+                            return;
                         }
-                    };
+                        const xhr = new XMLHttpRequest();
+                        const formData = new FormData();
+                        xhr.open('POST','/schedule');
+                        formData.append("content",addSchedule['content'].value);
+                        formData.append("start_date",addSchedule['start_date'].value);
+                        formData.append("end_date",addSchedule['start_date'].value);
+                        xhr.onreadystatechange = () => {
+                         if(xhr.readyState === XMLHttpRequest.DONE){
+                            if(xhr.status >= 200 && xhr.status<300) {
+
+                            }else {
+
+                            }
+                           }
+                        };
+                        xhr.send(formData);
+                    }
                 }
             }
         },

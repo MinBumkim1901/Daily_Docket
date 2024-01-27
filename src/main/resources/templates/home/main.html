@@ -5,13 +5,22 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/main.css}">
     <title>메인</title>
 </head>
 <body>
-<h2>Daily_Docket</h2>
-<a th:if="${session.user == null}" th:href="@{/login}">로그인</a>
-<a th:if="${session.user != null}" th:href="@{/logout}">로그아웃</a>
-<a th:if="${session.user != null}" th:href="@{/calender}">일정보러가기</a>
-
+<header id="headLine">
+    <span class="title">
+        <h2>Daily Docket</h2>
+    </span>
+    <span class="login">
+        <a th:if="${session.user == null}" th:href="@{/login}">로그인</a>
+        <a th:if="${session.user != null}" th:href="@{/calender}">일정</a>
+        <a th:if="${session.user != null}" th:href="@{/logout}">로그아웃</a>
+    </span>
+</header>
+<main>
+    <h3>자신의 </h3>
+</main>
 </body>
 </html>

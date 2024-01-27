@@ -3,7 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kmb.daliyDocket.mappers.CalenderMapper">
-    <insert id="insertCalender">
-
+    <insert id="insertSchedule"
+    parameterType="com.kmb.daliyDocket.entities.CalenderEntity">
+        INSERT INTO `daily_docket`.`schedule`(email, content, start_date, end_date)
+        VALUES (#{email},
+                #{schedule_text},
+                #{start_date},
+                #{end_date)}
     </insert>
 </mapper>
