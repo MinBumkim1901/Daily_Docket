@@ -30,6 +30,12 @@ public class RegisterController {
         ModelAndView modelAndView = new ModelAndView("login/login");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/findAccount", method = RequestMethod.GET)
+    public ModelAndView getFindAccount() {
+        ModelAndView modelAndView = new ModelAndView("login/findAccount");
+        return modelAndView;
+    }
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public String postLogin(HttpSession session,UserEntity user){

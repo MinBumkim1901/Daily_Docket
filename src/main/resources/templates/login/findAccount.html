@@ -14,32 +14,32 @@
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form id="registerForm">
-            <h1>계정 만들기</h1>
-            <input type="email" maxlength="50" name="email" placeholder="이메일">
-            <input type="password" maxlength="20" name="password" placeholder="비밀번호">
-            <input type="text" maxlength="5" name="name" placeholder="이름">
-            <input type="text" maxlength="10" name="nickname" placeholder="닉네임">
-            <input type="date" name="birth" placeholder="생일">
-            <input type="submit" value="회원가입">
+            <h1>비밀번호 변경</h1>
+            <span>아이디를 사용해 비밀번호를 변경해주세요!</span>
+            <input name="email" type="email" placeholder="이름">
+            <input name="password" type="password" placeholder="비밀번호를 입력해주세요">
+            <input name="passwordCheck" type="password" placeholder="비밀번호를 한번 더 입력해주세요">
+            <a href="/login">로그인 하러가기</a>
+            <input type="submit" value="변경">
         </form>
     </div>
     <div class="form-container sign-in-container">
         <form id="loginForm">
-            <h1>로그인</h1>
-            <span>계정을 사용해 로그인하세요!</span>
-            <input name="email" type="email" placeholder="이메일">
-            <input name="password" type="password" placeholder="비밀번호">
-            <a href="/findAccount">비밀번호를 잊으셨나요?</a>
-            <input type="submit" value="로그인">
+            <h1>아이디 찾기</h1>
+            <span>개인정보를 사용해 아이디를 찾아주세요!</span>
+            <input name="name" type="text" placeholder="이름">
+            <input name="birth" type="date" placeholder="아이디">
+            <a href="/login">로그인 하러가기</a>
+            <input type="submit" value="찾기">
         </form>
     </div>
     <div class="overlay-container">
         <div class="overlay">
             <div class="overlay-panel overlay-left">
-                <button class="ghost" id="signIn">로그인</button>
+                <button class="ghost" id="signIn">아이디 찾기</button>
             </div>
             <div class="overlay-panel overlay-right">
-                <button class="ghost" id="signUp">회원가입</button>
+                <button class="ghost" id="signUp">비밀번호 변경</button>
             </div>
         </div>
     </div>
