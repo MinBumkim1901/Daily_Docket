@@ -26,4 +26,18 @@ public class CalenderService {
         calender.setEmail(user.getEmail());
         return calenderMapper.insertSchedule(calender) > 0;
     }
+
+    public CalenderEntity[] selectSchedule(HttpSession session){
+
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        CalenderEntity[] schedule = calenderMapper.selectSchedule(user.getEmail());
+
+        if (schedule == null) {
+            // 스케줄이 없는 경우 빈 배열을 반환
+            return null;
+        } else {
+            // 스케줄이 있는 경우 해당 스케줄 배열 반환
+            return schedule;
+        }
+    }
 }

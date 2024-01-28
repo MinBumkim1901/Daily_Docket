@@ -12,4 +12,16 @@
                 #{startDate},
                 #{endDate})
     </insert>
+
+    <select id="selectSchedule"
+            resultType="com.kmb.daliyDocket.entities.CalenderEntity">
+        SELECT `email`      AS `email`,
+               `content`    AS `content`,
+               `start_date` AS `startDate`,
+               `end_date`   AS `endDate`
+        FROM daily_docket.`schedule`
+        WHERE BINARY `email` = #{email}
+    </select>
+
+
 </mapper>
