@@ -58,6 +58,7 @@ public class RegisterController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date birth = sdf.parse(birthStr);
         user.setBirth(birth);
+
         RegisterResult result = userService.registerResult(user);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());

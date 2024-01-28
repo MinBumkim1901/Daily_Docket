@@ -1,7 +1,9 @@
 const addSchedule = document.getElementById('addSchedule');
+
 addSchedule.show = () =>{
     addSchedule.classList.add('observable');
 }
+
 addSchedule.remove = () =>{
     addSchedule.classList.remove('observable');
 }
@@ -68,44 +70,52 @@ document.addEventListener('DOMContentLoaded', function() {
         ],
         customButtons: {
             addEventButton: { // 추가한 버튼 설정
-                text: "일정 추가",  // 버튼 내용
-                click: function () { // 버튼 클릭 시 이벤트 추가
-                    // Show the modal
-                    addSchedule.show();
-                    var content = addSchedule['content'].value;
-                    var start_date = addSchedule['start_date'].value;
-                    var end_date = addSchedule['end_date'].value;
+                text : "일정 추가",  // 버튼 내용
+                click : function(){ // 버튼 클릭 시 이벤트 추가
+                    $("#calendarModal").modal("show"); // modal 나타내기
 
-                    // Set the onsubmit handler
-                    addSchedule.onsubmit = e => {
-                        e.preventDefault();
-                        if (content == null || content === "") {
-                            alert("내용을 입력하세요.");
-                            return;
-                        } else if (start_date === "" || end_date === "") {
-                            alert("날짜를 입력하세요.");
-                            return;
-                        } else if (new Date(end_date) - new Date(start_date) < 0) {
-                            alert("종료일이 시작일보다 먼저입니다.");
-                            return;
-                        }
-                        const xhr = new XMLHttpRequest();
-                        const formData = new FormData();
-                        xhr.open('POST','/schedule');
-                        formData.append("content",addSchedule['content'].value);
-                        formData.append("start_date",addSchedule['start_date'].value);
-                        formData.append("end_date",addSchedule['start_date'].value);
-                        xhr.onreadystatechange = () => {
-                         if(xhr.readyState === XMLHttpRequest.DONE){
-                            if(xhr.status >= 200 && xhr.status<300) {
+                    $("#addCalendar").on("click",function(){  // modal의 추가 버튼 클릭 시
+                        var content = $("#calendar_content").val();
+                        var start_date = $("#calendar_start_date").val();
+                        var end_date = $("#calendar_end_date").val();
+                        addSchedule.onsubmit = e => {
+                            e.preventDefault();
+                            //내용 입력 여부 확인
+                            if (content == null || content === "") {
+                                alert("내용을 입력하세요.");
+                                return;
+                            } else if (start_date === "" || end_date === "") {
+                                alert("날짜를 입력하세요.");
+                                return;
+                            } else if (new Date(end_date) - new Date(start_date) < 0) { // date 타입으로 변경 후 확인
+                                alert("종료일이 시작일보다 먼저입니다.");
+                                return;
+                            } else { // 정상적인 입력 시
+                                const xhr = new XMLHttpRequest();
+                                const formData = new FormData();
+                                formData.append("content", content);
+                                formData.append("start", start_date);
+                                formData.append("end", end_date);
+                                xhr.open('POST', '/calender');
+                                xhr.onreadystatechange = () => {
+                                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                                        if (xhr.status >= 200 && xhr.status < 300) {
+                                            if (xhr.responseText === 'true') {
+                                                alert('일정이 추가되었습니다');
+                                                location.href = '/calender';
+                                            } else if (xhr.responseText === 'false') {
+                                                alert('로그인이 실패했습니다!');
+                                            }
+                                        } else {
+                                            alert('오류 발생');
+                                        }
 
-                            }else {
-
+                                    }
+                                }
+                                xhr.send(formData);
                             }
-                           }
-                        };
-                        xhr.send(formData);
-                    }
+                        }
+                    });
                 }
             }
         },

@@ -17,10 +17,12 @@ public class CalenderService {
 
     public boolean postCalender(CalenderEntity calender, HttpSession session) {
         UserEntity user = (UserEntity) session.getAttribute("user");
+        //로그인한 유저의 세션 정보를 받아온다.
 
         if(user == null){
             return false;
         }
+
         calender.setEmail(user.getEmail());
         return calenderMapper.insertSchedule(calender) > 0;
     }

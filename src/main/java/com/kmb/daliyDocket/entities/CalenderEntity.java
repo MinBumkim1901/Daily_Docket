@@ -6,9 +6,9 @@ import java.util.Objects;
 public class CalenderEntity {
     private int index;
     private String email;
-    private String scheduleText;
-    private Date start_date;
-    private Date end_date;
+    private String content;
+    private Date startDate;
+    private Date endDate;
 
     @Override
     public boolean equals(Object o) {
@@ -41,30 +41,30 @@ public class CalenderEntity {
         return this;
     }
 
-    public String getScheduleText() {
-        return scheduleText;
+    public String getContent() {
+        return content;
     }
 
-    public CalenderEntity setScheduleText(String scheduleText) {
-        this.scheduleText = scheduleText;
+    public CalenderEntity setContent(String content) {
+        this.content = content;
         return this;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public CalenderEntity setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public CalenderEntity setStartDate(Date startDate) {
+        this.startDate = startDate;
         return this;
     }
 
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public CalenderEntity setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public CalenderEntity setEndDate(Date endDate) {
+        this.endDate = endDate;
         return this;
     }
 }
