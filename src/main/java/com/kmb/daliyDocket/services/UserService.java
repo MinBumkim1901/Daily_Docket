@@ -33,6 +33,7 @@ public class UserService {
                 : RegisterResult.FAILURE;
         //삼항식을 사용해 성공시 Insert(데이터 삽입) 실패시 회원가입 메서드 종료
     }
+    //회원가입 결과
 
     public boolean login(UserEntity user) {
         if (user.getEmail() == null ||
@@ -52,9 +53,11 @@ public class UserService {
         user.setNickname(existingUser.getNickname());
         return true;
     }
+    //로그인 결과
 
     public UserEntity getUser(HttpSession session) {
         UserEntity user = (UserEntity) session.getAttribute("user");
         return this.userMapper.selectUserByEmail(user.getEmail());
     }
+
 }

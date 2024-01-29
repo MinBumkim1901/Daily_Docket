@@ -6,14 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>회원가입</title>
-    <script defer th:src="@{/resources/scripts/register.js}"></script>
-    <script defer th:src="@{/resources/scripts/login.js}"></script>
+    <script defer th:src="@{/resources/scripts/account.js}"></script>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/register.css}">
 </head>
 <body>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form id="registerForm">
+        <form id="passwordForm">
             <h1>비밀번호 변경</h1>
             <span>아이디를 사용해 비밀번호를 변경해주세요!</span>
             <input name="email" type="email" placeholder="이름">
@@ -24,7 +23,7 @@
         </form>
     </div>
     <div class="form-container sign-in-container">
-        <form id="loginForm">
+        <form id="emailForm">
             <h1>아이디 찾기</h1>
             <span>개인정보를 사용해 아이디를 찾아주세요!</span>
             <input name="name" type="text" placeholder="이름">

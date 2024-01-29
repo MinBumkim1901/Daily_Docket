@@ -18,10 +18,10 @@ import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/")
-public class RegisterController {
+public class UserController {
     private final UserService userService;
 
-    public RegisterController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -31,11 +31,6 @@ public class RegisterController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/findAccount", method = RequestMethod.GET)
-    public ModelAndView getFindAccount() {
-        ModelAndView modelAndView = new ModelAndView("login/findAccount");
-        return modelAndView;
-    }
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public String postLogin(HttpSession session,UserEntity user){
@@ -70,5 +65,18 @@ public class RegisterController {
             put("result", result.name().toLowerCase());
         }};
         return String.valueOf(responseObject);
+    }
+
+
+    @RequestMapping(value = "/findAccount", method = RequestMethod.GET)
+    public ModelAndView getFindAccount() {
+        ModelAndView modelAndView = new ModelAndView("login/findAccount");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/emailFind",method = RequestMethod.GET)
+    public String getEmailFind(){
+
+        return null;
     }
 }
