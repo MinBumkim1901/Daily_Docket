@@ -2,11 +2,12 @@ package com.kmb.daliyDocket.services;
 
 import com.kmb.daliyDocket.entities.UserEntity;
 import com.kmb.daliyDocket.enums.RegisterResult;
+import com.kmb.daliyDocket.enums.SearchEmailResult;
 import com.kmb.daliyDocket.mappers.UserMapper;
 import com.kmb.daliyDocket.utils.CryptoUtil;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 @Service
 public class UserService {
@@ -55,9 +56,20 @@ public class UserService {
     }
     //로그인 결과
 
-    public UserEntity getUser(HttpSession session) {
-        UserEntity user = (UserEntity) session.getAttribute("user");
-        return this.userMapper.selectUserByEmail(user.getEmail());
+    public SearchEmailResult emailResult(String name, Date birthday) {
+        UserEntity users = this.userMapper.selectUserByName(name);
+
+
+        if(!users.getName().equals(name)){
+            return SearchEmailResult.FAILED;
+        }
+
+        return SearchEmailResult.SUCCESS;
     }
+    public String email(String name) {
+        UserEntity users = this.userMapper.selectUserByName(name);
+        return (users != null) ? users.getEmail() : null;
+    }
+
 
 }

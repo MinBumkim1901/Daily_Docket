@@ -1,6 +1,8 @@
 package com.kmb.daliyDocket.enums;
 
 public enum SearchEmailResult {
-    EMAILFAILED,
-    NAMEFAILED
+    NAME_FAILED,
+    BIRTH_FAILED,
+    SUCCESS,
+    FAILED
 }

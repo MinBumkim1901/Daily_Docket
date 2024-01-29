@@ -4,6 +4,8 @@ import com.kmb.daliyDocket.entities.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
+
 @Mapper
 public interface UserMapper {
     UserEntity selectUserByEmail(@Param("email") String email);
@@ -11,5 +13,7 @@ public interface UserMapper {
     UserEntity selectUserByNickName(@Param("nickname") String nickname);
 
     int insertUser(UserEntity user);
+
+    UserEntity selectUserByName(@Param("name")String name);
 
 }

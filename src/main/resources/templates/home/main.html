@@ -14,7 +14,7 @@
         <h2>Daily Docket</h2>
     </span>
     <span class="login">
-        <a th:if="${session.user == null}" th:href="@{/login}">로그인</a>
+        <a th:if="${session.user == null}" th:href="@{/user/login}">로그인</a>
         <a th:if="${session.user != null}" th:href="@{/calender}">일정</a>
         <a th:if="${session.user != null}" th:href="@{/logout}">로그아웃</a>
     </span>

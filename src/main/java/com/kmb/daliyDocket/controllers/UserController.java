@@ -2,6 +2,7 @@ package com.kmb.daliyDocket.controllers;
 
 import com.kmb.daliyDocket.entities.UserEntity;
 import com.kmb.daliyDocket.enums.RegisterResult;
+import com.kmb.daliyDocket.enums.SearchEmailResult;
 import com.kmb.daliyDocket.services.UserService;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -25,13 +26,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/login", method = RequestMethod.GET)
     public ModelAndView getLogin() {
         ModelAndView modelAndView = new ModelAndView("login/login");
         return modelAndView;
     }
+    //로그인
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/user/login",method = RequestMethod.POST)
     @ResponseBody
     public String postLogin(HttpSession session,UserEntity user){
         boolean result = this.userService.login(user);
@@ -50,7 +52,7 @@ public class UserController {
         return modelAndView;
     } //로그아웃 클릭시 세션값을 null로 설정해 로그인 풀리게 하는 GET메서드
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
     @ResponseBody //HTTP 본문요청 되게해준다
     public String getRegister(UserEntity user,
                               @RequestParam(value = "birthStr")String birthStr) throws ParseException{
@@ -68,15 +70,28 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/findAccount", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/findAccount", method = RequestMethod.GET)
     public ModelAndView getFindAccount() {
         ModelAndView modelAndView = new ModelAndView("login/findAccount");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/emailFind",method = RequestMethod.GET)
-    public String getEmailFind(){
+    @RequestMapping(value = "/user/findAccount/email",method = RequestMethod.GET)
+    @ResponseBody//
+    public String getEmailFind(@RequestParam(value = "name")String name,
+                               @RequestParam(value = "birthStr")String birthStr) throws ParseException {
 
-        return null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date birthday = sdf.parse(birthStr);
+
+        String email = this.userService.email(name);
+
+        SearchEmailResult result = this.userService.emailResult(name,birthday);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+            put("email", email);
+        }};
+
+        return responseObject.toString();
     }
 }
