@@ -84,14 +84,21 @@ public class UserController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date birthday = sdf.parse(birthStr);
 
-        String email = this.userService.email(name);
-
         SearchEmailResult result = this.userService.emailResult(name,birthday);
+
+        String email = this.userService.findEmail(name);
+
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
-            put("email", email);
+            put("email", email); //이메일을 JSON값으로 HTTP 본문에 반환
         }};
 
         return responseObject.toString();
+    }
+
+    @RequestMapping(value = "/user/findAccount/password",method = RequestMethod.GET)
+    @ResponseBody//
+    public String getEmailFind(){
+        return null;
     }
 }

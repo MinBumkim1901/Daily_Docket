@@ -1,36 +1,43 @@
-const SearchEmailForm = document.getElementById('SearchEmailForm');
+const searchEmailForm = document.getElementById('searchEmailForm');
+const patchEmailForm = document.getElementById('patchPasswordForm');
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
 
-SearchEmailForm.onsubmit = e =>{
+
+signUpButton.addEventListener('click', () => {
+    container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+    container.classList.remove("right-panel-active");
+});
+
+searchEmailForm.onsubmit = e =>{
     e.preventDefault();
     //폼제출 방지
-    
-    if(SearchEmailForm['name'].value === ''){
+
+    if(searchEmailForm['name'].value === ''){
         alert('이름을 입력해주세요');
         return;
     }
-    if(SearchEmailForm['birth'].value ===''){
+    if(searchEmailForm['birth'].value ===''){
         alert('생일을 입력해주세요');
         return;
     }
-    
+
     const xhr = new XMLHttpRequest();
-    xhr.open('GET',`/user/findAccount/email?name=${SearchEmailForm['name'].value}&birthStr=${SearchEmailForm['birth'].value}`);
+    xhr.open('GET',`/user/findAccount/email?name=${searchEmailForm['name'].value}&birthStr=${searchEmailForm['birth'].value}`);
     xhr.onreadystatechange = () => {
      if(xhr.readyState === XMLHttpRequest.DONE){
         if(xhr.status >= 200 && xhr.status<300) {
             const responseObject = JSON.parse(xhr.responseText);
             switch (responseObject.result) {
-                case 'name_failed':
-                    alert('존재하지 않는 이름입니다.');
-                    break;
-                case 'birth_failed':
-                    alert('존재하지 않는 생일입니다');
-                break;
                 case 'failed':
-                    alert('존재하지 않음!');
+                    alert('존재하지 않는 유저입니다!');
                     break;
                 case 'success':
-                    alert(SearchEmailForm['name'].value+'님의 이메일은 '+responseObject.email+' 입니다.');
+                    alert(searchEmailForm['name'].value+'님의 이메일은 '+responseObject.email+' 입니다.');
                     break;
                 default:
                     alert('서버오류');
@@ -42,3 +49,27 @@ SearchEmailForm.onsubmit = e =>{
     };
     xhr.send();
 };
+
+patchEmailForm.onsubmit = e => {
+    e.preventDefault();
+    //폼 제출 방지
+
+    if(patchEmailForm['email'].value === '') {
+        alert('이메일을 입력해주세요');
+        return;
+    }
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    xhr.open('GET', `/user/findAccount/passwordCheck?email=${patchEmailForm['email'].value}`);
+    xhr.onreadystatechange = () => {
+     if(xhr.readyState === XMLHttpRequest.DONE){
+        if(xhr.status >= 200 && xhr.status<300) {
+        
+        }else {
+        
+        }
+       }
+    };
+    xhr.send(formData);
+
+}

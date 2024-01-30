@@ -3,8 +3,11 @@ package com.kmb.daliyDocket.services;
 import com.kmb.daliyDocket.entities.UserEntity;
 import com.kmb.daliyDocket.enums.RegisterResult;
 import com.kmb.daliyDocket.enums.SearchEmailResult;
+import com.kmb.daliyDocket.enums.SendRecoverPasswordResult;
 import com.kmb.daliyDocket.mappers.UserMapper;
 import com.kmb.daliyDocket.utils.CryptoUtil;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -59,16 +62,42 @@ public class UserService {
     public SearchEmailResult emailResult(String name, Date birthday) {
         UserEntity users = this.userMapper.selectUserByName(name);
 
-
-        if(!users.getName().equals(name)){
+        if(users == null){
             return SearchEmailResult.FAILED;
         }
 
         return SearchEmailResult.SUCCESS;
-    }
-    public String email(String name) {
+    } //이메일 찾기 결과
+
+    public String findEmail(String name) {
         UserEntity users = this.userMapper.selectUserByName(name);
         return (users != null) ? users.getEmail() : null;
+    } //이메일을 데이터베이스에서 찾아서 돌려주기
+
+    public SendRecoverPasswordResult getEmailCheck(SendRecoverPasswordResult sendRecoverPasswordResult) {
+//        UserEntity existingUser = this.recoverMapper.selectUserByEmailContact(recoverEmailContactCode.getEmail(), recoverEmailContactCode.getContact());
+//        //작성하는 이메일과 전화번호를 기준으로 User테이블에 select(검색)한다.
+//        if (existingUser == null) {
+//            return SendRecoverContactCodeResult.FAILURE;
+//        }
+//        //유저 테이블에 없는 이메일이나 전화번호 입력시 FAILURE 반환
+//
+//        String code = RandomStringUtils.randomNumeric(6); //랜덤 숫자 6자리 (인증번호)
+//        String salt = CryptoUtil.hashSha512(String.format("%s%s%f%f", //비밀번호 암호화
+//                recoverEmailContactCode.getCode(),
+//                code,
+//                Math.random(),
+//                Math.random()));
+//        Date createdAt = new Date(); //시간제한을 걸기위한 Date값
+//        Date expiresAt = DateUtils.addMinutes(createdAt, 5); //시간제한 5분
+//        recoverEmailContactCode.setCode(code).setSalt(salt).setCreatedAt(createdAt).setExpiresAt(expiresAt).setExpired(false);
+//
+//        NCloudUtil.sendSms(recoverEmailContactCode.getContact(), String.format("[UFO 계정 복구] 비밀번호 변경 인증번호[%s]를 입력해주세요", recoverEmailContactCode.getCode()));
+//
+//        return this.recoverMapper.insertRecoverEmailContactCode(recoverEmailContactCode) > 0
+//                ? SendRecoverContactCodeResult.SUCCESS
+//                : SendRecoverContactCodeResult.FAILURE;
+        return null;
     }
 
 
