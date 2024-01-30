@@ -1,5 +1,6 @@
 package com.kmb.daliyDocket.mappers;
 
+import com.kmb.daliyDocket.entities.RecoverEmailCodeEntity;
 import com.kmb.daliyDocket.entities.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,5 +16,7 @@ public interface UserMapper {
     int insertUser(UserEntity user);
 
     UserEntity selectUserByName(@Param("name")String name);
+
+    int insertRecoverEmailCode(RecoverEmailCodeEntity recoverEmailCode);
 
 }

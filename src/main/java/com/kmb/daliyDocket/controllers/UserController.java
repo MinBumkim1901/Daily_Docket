@@ -1,8 +1,10 @@
 package com.kmb.daliyDocket.controllers;
 
+import com.kmb.daliyDocket.entities.RecoverEmailCodeEntity;
 import com.kmb.daliyDocket.entities.UserEntity;
 import com.kmb.daliyDocket.enums.RegisterResult;
 import com.kmb.daliyDocket.enums.SearchEmailResult;
+import com.kmb.daliyDocket.enums.SendRecoverPasswordResult;
 import com.kmb.daliyDocket.services.UserService;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -96,9 +99,17 @@ public class UserController {
         return responseObject.toString();
     }
 
-    @RequestMapping(value = "/user/findAccount/password",method = RequestMethod.GET)
+    @RequestMapping(value = "/user/findAccount/recoverPassword", method = RequestMethod.GET)
     @ResponseBody//
-    public String getEmailFind(){
-        return null;
-    }
+    public String getEmailFind(RecoverEmailCodeEntity recoverEmailCode) throws MessagingException {
+        SendRecoverPasswordResult result = this.userService.getEmailCheck(recoverEmailCode);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+
+        if (result == SendRecoverPasswordResult.SUCCESS) {
+            responseObject.put("salt", recoverEmailCode.getSalt());
+        }
+        return responseObject.toString();
+    } //링크보내기
 }

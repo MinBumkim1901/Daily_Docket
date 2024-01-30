@@ -4,6 +4,18 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kmb.daliyDocket.mappers.UserMapper">
 
+    <select id="selectUserByEmail"
+            resultType="com.kmb.daliyDocket.entities.UserEntity">
+        SELECT `email`    AS `email`,
+               `password` AS `password`,
+               `name`     AS `name`,
+               `nickname` AS `nickname`,
+               `birth`    AS `birth`
+        FROM daily_docket.`users`
+        WHERE BINARY `email` = #{email}
+        LIMIT 1
+    </select>
+
     <select id="selectUserByName"
             resultType="com.kmb.daliyDocket.entities.UserEntity">
         SELECT `email`    AS `email`,
@@ -34,4 +46,17 @@
                 IFNULL(#{registeredAt}, DEFAULT(`registered_at`)),
                 #{isAdmin})
     </insert>
+
+    <insert id="insertRecoverEmailCode"
+            parameterType="com.kmb.daliyDocket.entities.RecoverEmailCodeEntity">
+        INSERT INTO `daily_docket`.`recover_email_codes`(email, code, salt, created_at, expires_at, expires_flag)
+        VALUES (#{email},
+                #{code},
+                #{salt},
+                #{createdAt},
+                #{expiresAt},
+                #{isExpired})
+    </insert>
+
+
 </mapper>

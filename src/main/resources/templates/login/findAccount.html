@@ -16,10 +16,16 @@
             <h1>비밀번호 변경</h1>
             <span>아이디를 사용해 비밀번호를 변경해주세요!</span>
             <input name="email" type="email" placeholder="이메일">
-            <input type="submit" value="확인">
-            <input name="password" type="password" placeholder="비밀번호를 입력해주세요">
-            <input name="passwordCheck" type="password" placeholder="비밀번호를 한번 더 입력해주세요">
-            <input type="submit" value="변경">
+
+            <input type="submit" name="sendNumber" value="전송">
+
+            <input disabled name="code" type="text">
+            <input disabled hidden name="salt" type="text">
+            <input disabled type="submit" name="verifiedNumber" value="확인">
+
+            <input disabled name="password" type="password" placeholder="비밀번호를 입력해주세요">
+            <input disabled name="passwordCheck" type="password" placeholder="비밀번호를 한번 더 입력해주세요">
+            <input disabled type="submit" name="changePassword" value="변경">
         </form>
     </div>
     <div class="form-container sign-in-container">

@@ -50,26 +50,51 @@ searchEmailForm.onsubmit = e =>{
     xhr.send();
 };
 
-patchEmailForm.onsubmit = e => {
+patchEmailForm['sendNumber'].addEventListener('click', (e) => {
     e.preventDefault();
-    //폼 제출 방지
+    // 이벤트 핸들러에서 폼 제출 방지
 
-    if(patchEmailForm['email'].value === '') {
+    if (patchEmailForm['email'].value === '') {
         alert('이메일을 입력해주세요');
         return;
     }
-    const xhr = new XMLHttpRequest();
-    const formData = new FormData();
-    xhr.open('GET', `/user/findAccount/passwordCheck?email=${patchEmailForm['email'].value}`);
-    xhr.onreadystatechange = () => {
-     if(xhr.readyState === XMLHttpRequest.DONE){
-        if(xhr.status >= 200 && xhr.status<300) {
-        
-        }else {
-        
-        }
-       }
-    };
-    xhr.send(formData);
 
-}
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `/user/findAccount/recoverPassword?email=${patchEmailForm['email'].value}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'failure':
+                        alert('인증번호 전송을 실패했습니다! 재시도해주세요');
+                        break;
+                    case 'success':
+                        alert('인증번호를 보냈으니 5분안에 확인해주세요!');
+                        patchEmailForm['salt'].value = responseObject.salt;
+                        patchEmailForm['email'].setAttribute('disabled','disabled');
+                        patchEmailForm['sendNumber'].setAttribute('disabled','disabled');
+                        patchEmailForm['code'].removeAttribute('disabled');
+                        patchEmailForm['verifiedNumber'].removeAttribute('disabled');
+                        // 폼 제출 함수 호출
+                        break;
+                    default:
+                        alert('서버오류');
+                }
+            } else {
+                alert('서버오류');
+            }
+        }
+    };
+    xhr.send();
+});
+patchEmailForm['verifiedNumber'].addEventListener('click', (e) => {
+    e.preventDefault();
+    // 이벤트 핸들러에서 폼 제출 방지
+});
+
+patchEmailForm['changePassword'].addEventListener('click', (e) => {
+    e.preventDefault();
+    // 이벤트 핸들러에서 폼 제출 방지
+});
+
