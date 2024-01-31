@@ -19,4 +19,8 @@ public interface UserMapper {
 
     int insertRecoverEmailCode(RecoverEmailCodeEntity recoverEmailCode);
 
+    RecoverEmailCodeEntity selectRecoverCodeSaltByEmail(RecoverEmailCodeEntity recoverEmailCode);
+
+    int updateRecoverCodeByEmail(RecoverEmailCodeEntity recoverEmailCode);
+
 }

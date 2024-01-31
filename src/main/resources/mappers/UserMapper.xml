@@ -58,5 +58,29 @@
                 #{isExpired})
     </insert>
 
+    <select id="selectRecoverCodeSaltByEmail"
+            resultType="com.kmb.daliyDocket.entities.RecoverEmailCodeEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `code`         AS `code`,
+               `salt`         AS `salt`,
+               `created_at`   AS `createdAt`,
+               `expires_at`   AS `expiresAt`,
+               `expires_flag` AS `isExpired`
+        FROM `daily_docket`.`recover_email_codes`
+        WHERE BINARY `email` = #{email}
+          AND BINARY `code` = #{code}
+          AND BINARY `salt` = #{salt}
+        LIMIT 1
+    </select>
+
+    <update id="updateRecoverCodeByEmail"
+            parameterType="com.kmb.daliyDocket.entities.RecoverEmailCodeEntity">
+        UPDATE `daily_docket`.`recover_email_codes`
+        SET `expires_flag` = #{isExpired}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
 
 </mapper>

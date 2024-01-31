@@ -5,6 +5,7 @@ import com.kmb.daliyDocket.entities.UserEntity;
 import com.kmb.daliyDocket.enums.RegisterResult;
 import com.kmb.daliyDocket.enums.SearchEmailResult;
 import com.kmb.daliyDocket.enums.SendRecoverPasswordResult;
+import com.kmb.daliyDocket.enums.VerifyRecoverPasswordResult;
 import com.kmb.daliyDocket.mappers.UserMapper;
 import com.kmb.daliyDocket.utils.CryptoUtil;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -134,5 +135,24 @@ public class UserService {
                 : SendRecoverPasswordResult.FAILURE;
     }
 
+    public VerifyRecoverPasswordResult patchEmailCheck(RecoverEmailCodeEntity recoverEmailCode) {
 
+        recoverEmailCode = this.userMapper.selectRecoverCodeSaltByEmail(recoverEmailCode);
+//        //email / code / salt 값 비교
+
+        if (recoverEmailCode == null) {
+            return VerifyRecoverPasswordResult.FAILURE;
+        } //없는 경우 + 틀린 경우 false
+
+        if (new Date().compareTo(recoverEmailCode.getExpiresAt()) > 0) {
+            return VerifyRecoverPasswordResult.FAILURE;
+        } //인증시간 경과 false
+
+        recoverEmailCode.setExpired(true);
+        //위의 조건 통과시 인증을 true로 바꿈
+
+        return this.userMapper.updateRecoverCodeByEmail(recoverEmailCode) > 0
+                ? VerifyRecoverPasswordResult.SUCCESS
+                : VerifyRecoverPasswordResult.FAILURE;
+    }
 }

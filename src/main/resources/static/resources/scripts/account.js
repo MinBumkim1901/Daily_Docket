@@ -60,7 +60,7 @@ patchEmailForm['sendNumber'].addEventListener('click', (e) => {
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `/user/findAccount/recoverPassword?email=${patchEmailForm['email'].value}`);
+    xhr.open('GET', `/user/findAccount/emailCheck?email=${patchEmailForm['email'].value}`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -72,7 +72,7 @@ patchEmailForm['sendNumber'].addEventListener('click', (e) => {
                     case 'success':
                         alert('인증번호를 보냈으니 5분안에 확인해주세요!');
                         patchEmailForm['salt'].value = responseObject.salt;
-                        patchEmailForm['email'].setAttribute('disabled','disabled');
+                        patchEmailForm['email'].setAttribute('readOnly','readOnly');
                         patchEmailForm['sendNumber'].setAttribute('disabled','disabled');
                         patchEmailForm['code'].removeAttribute('disabled');
                         patchEmailForm['verifiedNumber'].removeAttribute('disabled');
@@ -90,8 +90,34 @@ patchEmailForm['sendNumber'].addEventListener('click', (e) => {
 });
 patchEmailForm['verifiedNumber'].addEventListener('click', (e) => {
     e.preventDefault();
-    // 이벤트 핸들러에서 폼 제출 방지
-});
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('email', patchEmailForm['email'].value);
+    formData.append('salt', patchEmailForm['salt'].value);
+    formData.append('code', patchEmailForm['code'].value);
+    xhr.open('PATCH', '/user/findAccount/emailCheck');
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status >= 200 && xhr.status<300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'failure':
+                       alert('인증번호가 틀렸습니다!');
+                        break;
+                    case 'success':
+                        alert('인증성공!');
+                        break;
+                    default:
+                        alert('서버오류');
+                }
+            } else {
+                alert('서버오류');
+            }
+        }
+    };
+    xhr.send(formData);
+})
+
 
 patchEmailForm['changePassword'].addEventListener('click', (e) => {
     e.preventDefault();
