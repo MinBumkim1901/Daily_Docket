@@ -23,4 +23,6 @@ public interface UserMapper {
 
     int updateRecoverCodeByEmail(RecoverEmailCodeEntity recoverEmailCode);
 
+    int updatePassword(UserEntity user);
+
 }

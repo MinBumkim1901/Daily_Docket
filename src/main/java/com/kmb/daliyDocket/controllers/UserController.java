@@ -8,6 +8,7 @@ import com.kmb.daliyDocket.enums.SendRecoverPasswordResult;
 import com.kmb.daliyDocket.enums.VerifyRecoverPasswordResult;
 import com.kmb.daliyDocket.services.UserService;
 import org.json.JSONObject;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -124,4 +125,11 @@ public class UserController {
 
         return responseObject.toString();
     } //링크보내기
+
+    @RequestMapping(value = "/user/findAccount/ChangePassword", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchChangePassword(UserEntity user) {
+        boolean result = this.userService.patchPassword(user);
+        return String.valueOf(result);
+    } //비밀번호 변경
 }

@@ -155,4 +155,20 @@ public class UserService {
                 ? VerifyRecoverPasswordResult.SUCCESS
                 : VerifyRecoverPasswordResult.FAILURE;
     }
+
+    public boolean patchPassword(UserEntity user) {
+        if (user == null || user.getPassword() == null) {
+            return false;
+        }  // 입력값의 유효성 검사
+
+        String newPassword = CryptoUtil.hashSha512(user.getPassword());
+        // 새로운 비밀번호를 해싱하여 설정
+
+        user = this.userMapper.selectUserByEmail(user.getEmail());
+        // 이메일로 사용자 정보를 조회
+
+        user.setPassword(newPassword);
+        return this.userMapper.updatePassword(user) > 0;
+        // 비밀번호 업데이트 및 recoverEmailCode 삭제 후 결과 반환
+    }
 }

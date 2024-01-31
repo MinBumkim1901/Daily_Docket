@@ -12,7 +12,7 @@
 <body>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form id="patchPasswordForm">
+        <form id="recoverPasswordForm">
             <h1>비밀번호 변경</h1>
             <span>아이디를 사용해 비밀번호를 변경해주세요!</span>
             <input name="email" type="email" placeholder="이메일">
@@ -25,7 +25,7 @@
 
             <input disabled name="password" type="password" placeholder="비밀번호를 입력해주세요">
             <input disabled name="passwordCheck" type="password" placeholder="비밀번호를 한번 더 입력해주세요">
-            <input disabled type="submit" name="changePassword" value="변경">
+            <input disabled name="changePassword" type="submit"  value="변경">
         </form>
     </div>
     <div class="form-container sign-in-container">
@@ -34,8 +34,11 @@
             <span>개인정보를 사용해 아이디를 찾아주세요!</span>
             <input name="name" type="text" placeholder="이름">
             <input name="birth" type="date" placeholder="아이디">
-            <a href="/user/login">로그인 하러가기</a>
-            <input type="submit" value="찾기">
+            <input type="submit" value="이메일 찾기">
+            <span class="findAccount">
+                <a href="/user/login">로그인</a>
+                <a href="/">홈페이지</a>
+            </span>
         </form>
     </div>
     <div class="overlay-container">

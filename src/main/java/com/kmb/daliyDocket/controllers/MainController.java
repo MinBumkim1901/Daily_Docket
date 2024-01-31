@@ -20,8 +20,16 @@ public class MainController {
     }
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    public ModelAndView getMain(){
+    public ModelAndView getMain(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("home/main");
+        // 세션에서 로그인한 사용자 정보를 가져옵니다.
+        UserEntity user = (UserEntity) session.getAttribute("user");
+
+        // 만약 사용자 정보가 있다면 모델에 추가합니다.
+        if (user != null) {
+            modelAndView.addObject("user", user);
+        }
+
         return modelAndView;
     }
 }

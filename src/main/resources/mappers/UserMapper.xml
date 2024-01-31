@@ -82,5 +82,13 @@
         LIMIT 1
     </update>
 
+    <update id="updatePassword"
+            parameterType="com.kmb.daliyDocket.entities.UserEntity">
+        UPDATE `daily_docket`.`users`
+        SET `password` = #{password}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
+
 
 </mapper>

@@ -14,13 +14,24 @@
         <h2>Daily Docket</h2>
     </span>
     <span class="login">
-        <a th:if="${session.user == null}" th:href="@{/user/login}">로그인</a>
-        <a th:if="${session.user != null}" th:href="@{/calender}">일정</a>
-        <a th:if="${session.user != null}" th:href="@{/logout}">로그아웃</a>
+      <span th:if="${session.user == null}">
+        <a th:href="@{/user/login}">로그인</a>
+    </span>
+    <span th:if="${session.user != null}">
+        <span>안녕하세요, <span th:text="${user.getNickname()}">d</span>님</span>
+        <a th:href="@{/logout}">로그아웃</a>
+    </span>
     </span>
 </header>
 <main>
-    <h3>자신의 </h3>
+    <div>
+        <h2 th:if="${session.user == null}">자신의</h2>
+        <p th:if="${session.user == null}">일상 일정을 간편하게 관리하세요. "Daily Docket"은 여러분의 일정을 효율적으로 기록하고 추적할 수 있는 웹
+            애플리케이션입니다.</p>
+        <p th:if="${session.user == null}">로그인하여 개인 일정을 확인하고 작성하세요. 일정을 관리하는 새로운 경험을 시작해보세요!</p>
+        <a th:if="${session.user == null}" th:href="@{/user/login}" class="cta-button">지금 시작하기</a>
+        <a th:if="${session.user != null}" th:href="@{/calender}" class="cta-button">일정 확인하기</a>
+    </div>
 </main>
 </body>
 </html>

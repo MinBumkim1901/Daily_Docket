@@ -2,38 +2,35 @@
 
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
 
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Pretendard', Arial, sans-serif; /* Pretendard 폰트 적용 */
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 header {
     background-color: #333;
     color: #fff;
     padding: 10px;
-    align-items: center;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.title {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-.login,
-.calendar {
-    display: inline-block;
-    margin-right: 10px;
+.title h2 {
+    margin: 0;
+    font-size: 1.5em; /* 헤더 타이틀 폰트 크기 조정 */
 }
 
 .login a,
 .calendar a {
     color: #fff;
     text-decoration: none;
+    margin: 0 10px; /* 링크 간격 조정 */
 }
 
 .login a:hover,
@@ -42,16 +39,18 @@ header {
 }
 
 main {
-    /*margin: 0;*/
-    /*width: 100vw;*/
-    /*height: 90vh;*/
-    /*color: #212121;*/
-    /*font-size: 1rem;*/
-    /*font-weight: 400;*/
-    /*background-color: white;*/
-    /*align-items: center;*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+main > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+main h3 {
+    color: #333;
 }

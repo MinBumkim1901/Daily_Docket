@@ -1,5 +1,5 @@
 const searchEmailForm = document.getElementById('searchEmailForm');
-const patchEmailForm = document.getElementById('patchPasswordForm');
+const recoverPasswordForm = document.getElementById('recoverPasswordForm');
 const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');
 const container = document.getElementById('container');
@@ -50,17 +50,17 @@ searchEmailForm.onsubmit = e =>{
     xhr.send();
 };
 
-patchEmailForm['sendNumber'].addEventListener('click', (e) => {
+recoverPasswordForm['sendNumber'].addEventListener('click', (e) => {
     e.preventDefault();
     // 이벤트 핸들러에서 폼 제출 방지
 
-    if (patchEmailForm['email'].value === '') {
+    if (recoverPasswordForm['email'].value === '') {
         alert('이메일을 입력해주세요');
         return;
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `/user/findAccount/emailCheck?email=${patchEmailForm['email'].value}`);
+    xhr.open('GET', `/user/findAccount/emailCheck?email=${recoverPasswordForm['email'].value}`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -71,11 +71,11 @@ patchEmailForm['sendNumber'].addEventListener('click', (e) => {
                         break;
                     case 'success':
                         alert('인증번호를 보냈으니 5분안에 확인해주세요!');
-                        patchEmailForm['salt'].value = responseObject.salt;
-                        patchEmailForm['email'].setAttribute('readOnly','readOnly');
-                        patchEmailForm['sendNumber'].setAttribute('disabled','disabled');
-                        patchEmailForm['code'].removeAttribute('disabled');
-                        patchEmailForm['verifiedNumber'].removeAttribute('disabled');
+                        recoverPasswordForm['salt'].value = responseObject.salt;
+                        recoverPasswordForm['email'].setAttribute('readOnly','readOnly');
+                        recoverPasswordForm['sendNumber'].setAttribute('disabled','disabled');
+                        recoverPasswordForm['code'].removeAttribute('disabled');
+                        recoverPasswordForm['verifiedNumber'].removeAttribute('disabled');
                         // 폼 제출 함수 호출
                         break;
                     default:
@@ -88,13 +88,19 @@ patchEmailForm['sendNumber'].addEventListener('click', (e) => {
     };
     xhr.send();
 });
-patchEmailForm['verifiedNumber'].addEventListener('click', (e) => {
+recoverPasswordForm['verifiedNumber'].addEventListener('click', (e) => {
     e.preventDefault();
+
+    if(recoverPasswordForm['code'].value === ''){
+        alert('인증번호를 적어주세요!');
+        return;
+    }
+
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
-    formData.append('email', patchEmailForm['email'].value);
-    formData.append('salt', patchEmailForm['salt'].value);
-    formData.append('code', patchEmailForm['code'].value);
+    formData.append('email', recoverPasswordForm['email'].value);
+    formData.append('salt', recoverPasswordForm['salt'].value);
+    formData.append('code', recoverPasswordForm['code'].value);
     xhr.open('PATCH', '/user/findAccount/emailCheck');
     xhr.onreadystatechange = () => {
         if(xhr.readyState === XMLHttpRequest.DONE){
@@ -106,6 +112,11 @@ patchEmailForm['verifiedNumber'].addEventListener('click', (e) => {
                         break;
                     case 'success':
                         alert('인증성공!');
+                        recoverPasswordForm['code'].setAttribute('readOnly','readOnly');
+                        recoverPasswordForm['verifiedNumber'].setAttribute('disabled','disabled');
+                        recoverPasswordForm['password'].removeAttribute('disabled');
+                        recoverPasswordForm['passwordCheck'].removeAttribute('disabled');
+                        recoverPasswordForm['changePassword'].removeAttribute('disabled');
                         break;
                     default:
                         alert('서버오류');
@@ -119,8 +130,41 @@ patchEmailForm['verifiedNumber'].addEventListener('click', (e) => {
 })
 
 
-patchEmailForm['changePassword'].addEventListener('click', (e) => {
+recoverPasswordForm['changePassword'].addEventListener('click', (e) => {
     e.preventDefault();
+    if (recoverPasswordForm['password'].value === '') {
+        alert('비밀번호를 입력해주세요');
+        return;
+    } if (recoverPasswordForm['passwordCheck'].value === '') {
+        alert('비밀번호를 한번 더 입력해주세요');
+        return;
+    } if (recoverPasswordForm['password'].value !== recoverPasswordForm['passwordCheck'].value ) {
+        alert('비밀번호가 일치하지 않습니다!');
+        return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('email',recoverPasswordForm['email'].value);
+    formData.append('password',recoverPasswordForm['password'].value);
+    xhr.open('PATCH', '/user/findAccount/ChangePassword');
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                if (xhr.responseText === 'true') {
+                    alert('비밀번호 변경에 성공했습니다!');
+                    location.href = '/user/login';
+                    return;
+                } else if (xhr.responseText === 'false') {
+                   alert('비밀번호 변경에 실패했습니다!');
+                }
+            } else {
+                alert('통신');
+            }
+
+        }
+    }
+    xhr.send(formData);
     // 이벤트 핸들러에서 폼 제출 방지
 });
 
